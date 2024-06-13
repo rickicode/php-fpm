@@ -33,6 +33,9 @@ RUN apt-get update && apt-get install -y \
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
+# Copy custom PHP-FPM configuration to run as root
+COPY www.conf /usr/local/etc/php-fpm.d/www.conf
+
 # Expose port 9000 and start PHP-FPM server
 EXPOSE 9000
 CMD ["php-fpm"]
