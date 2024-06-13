@@ -1,6 +1,9 @@
 FROM php:8.2-fpm
+
 # Maintainer
 LABEL maintainer="rickicode@gmail.com"
+
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     autoconf g++ make memcached libmemcached-dev zlib1g-dev libssl-dev libicu-dev \
     && pecl install memcached \
@@ -26,3 +29,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable redis \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
+
+# Copy custom PHP configuration
+COPY php.ini /usr/local/etc/php/conf.d/custom.ini
+
+# Expose port 9000 and start PHP-FPM server
+EXPOSE 9000
+CMD ["php-fpm"]
