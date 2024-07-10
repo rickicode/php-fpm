@@ -29,7 +29,14 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-install shmop \
+    && docker-php-ext-install bz2 \
+    && docker-php-ext-install grpc \
+    && docker-php-ext-install opcache \
+    && docker-php-ext-install inotify \
+    && docker-php-ext-install apcu
+    
 
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
