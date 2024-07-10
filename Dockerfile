@@ -40,9 +40,7 @@ RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install grpc \
     && docker-php-ext-install opcache \
     && docker-php-ext-install inotify \
-    && docker-php-ext-install apcu \
-    && docker-php-ext-install snmp \
-    && docker-php-ext-install sodium
+    && docker-php-ext-install apcu 
     
 
 # Copy custom PHP configuration
