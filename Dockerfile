@@ -15,8 +15,9 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip iputils-ping \
     unzip nano dnsutils \
-    git default-mysql-client \
-    && docker-php-ext-install -j$(nproc) iconv \
+    git default-mysql-client
+    
+RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mysqli \
