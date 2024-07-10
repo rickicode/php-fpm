@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     zip iputils-ping \
     unzip nano dnsutils \
     git default-mysql-client \
-    postgresql-dev
+    postgres-server-dev-all
     
 RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install -j$(nproc) gd \
