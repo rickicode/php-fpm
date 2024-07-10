@@ -37,9 +37,7 @@ RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install intl \
     && docker-php-ext-install shmop \
     && docker-php-ext-install bz2 \
-    && docker-php-ext-install snmp \
-    && docker-php-ext-install apcu 
-    
+    && docker-php-ext-install snmp
 
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
