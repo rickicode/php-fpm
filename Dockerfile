@@ -37,7 +37,7 @@ RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install intl \
     && docker-php-ext-install shmop \
     && docker-php-ext-install bz2 \
-    && docker-php-ext-install opcache \
+    && docker-php-ext-install snmp \
     && docker-php-ext-install apcu 
     
 
