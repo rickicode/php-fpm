@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_pgsql \
+    && docker-php-ext-install pgsql \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install zip \
     && docker-php-ext-install exif \
@@ -36,7 +38,9 @@ RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install grpc \
     && docker-php-ext-install opcache \
     && docker-php-ext-install inotify \
-    && docker-php-ext-install apcu
+    && docker-php-ext-install apcu \
+    && docker-php-ext-install snmp \
+    && docker-php-ext-install sodium
     
 
 # Copy custom PHP configuration
