@@ -37,7 +37,8 @@ RUN docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install intl \
     && docker-php-ext-install shmop \
     && docker-php-ext-install bz2 \
-    && docker-php-ext-install snmp
+    && docker-php-ext-install snmp \
+    && mkdir -p /usr/src/php/ext/apcu && curl -fsSL https://pecl.php.net/get/apcu | tar xvz -C "/usr/src/php/ext/apcu" --strip 1 && docker-php-ext-install apcu 
 
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
