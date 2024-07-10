@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     zip iputils-ping \
     unzip nano dnsutils \
     git default-mysql-client \
-    libpq-dev libbz2-dev libmcrypt-dev libxslt-dev
+    libpq-dev libbz2-dev libmcrypt-dev libxslt-dev libsnmp-dev
 
     
 RUN docker-php-ext-install -j$(nproc) iconv \
