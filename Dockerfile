@@ -14,9 +14,11 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libzip-dev \
     zip iputils-ping \
-    unzip nano dnsutils \
+    unzip nano dnsutils openssl \
     git default-mysql-client \
-    libpq-dev libbz2-dev libmcrypt-dev libxslt-dev libsnmp-dev
+    libpq-dev libbz2-dev libmcrypt-dev libxslt-dev libsnmp-dev \
+    && sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1.0',g' /etc/ssl/openssl.cnf \
+    && sed -i 's,^\(CipherString[ ]*=\).*,\1'DEFAULT@SECLEVEL=1',g' /etc/ssl/openssl.cnf
 
     
 RUN docker-php-ext-install -j$(nproc) iconv \
