@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y \
     autoconf g++ make memcached libmemcached-dev zlib1g-dev libssl-dev libicu-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev zip iputils-ping \
     unzip nano dnsutils openssl git default-mysql-client libpq-dev libbz2-dev \
-    libmcrypt-dev libxslt-dev libsnmp-dev \
-    && pecl install memcached redis \
-    && docker-php-ext-enable memcached redis \
+    libmcrypt-dev libxslt-dev libsnmp-dev libmagickwand-dev libavif-dev libwebp-dev \
+    && pecl install memcached redis apcu imagick \
+    && docker-php-ext-enable memcached redis apcu imagick \
     && apt-get clean
 
 # Adjust SSL/TLS settings
@@ -20,13 +20,18 @@ RUN sed -i 's,^\(MinProtocol[ ]*=\).*,\1'TLSv1.0',g' /etc/ssl/openssl.cnf \
 # Install PHP extensions
 RUN docker-php-ext-install -j$(nproc) iconv gd pdo_mysql pdo pdo_pgsql mysqli zip \
     exif sockets opcache bcmath intl shmop bz2 snmp \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-avif --with-webp \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 
-# Install APCu
-RUN mkdir -p /usr/src/php/ext/apcu \
-    && curl -fsSL https://pecl.php.net/get/apcu | tar xvz -C "/usr/src/php/ext/apcu" --strip 1 \
-    && docker-php-ext-install apcu
+# Create and add apcu.ini
+RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
+    && echo "apc.enabled=1" >> /usr/local/etc/php/conf.d/apcu.ini \
+    && echo "apc.shm_size=102M" >> /usr/local/etc/php/conf.d/apcu.ini
+
+# Ensure imagick supports AVIF and WebP
+RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
+    && echo "imagick.skip_version_check=1" >> /usr/local/etc/php/conf.d/imagick.ini \
+    && echo "imagick.locale_fix=1" >> /usr/local/etc/php/conf.d/imagick.ini
 
 # Copy custom PHP configuration
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
