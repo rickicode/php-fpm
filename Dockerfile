@@ -26,7 +26,7 @@ RUN docker-php-ext-install -j$(nproc) iconv gd pdo_mysql pdo pdo_pgsql mysqli zi
 # Create and add apcu.ini
 RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && echo "apc.enabled=1" >> /usr/local/etc/php/conf.d/apcu.ini \
-    && echo "apc.shm_size=102M" >> /usr/local/etc/php/conf.d/apcu.ini
+    && echo "apc.shm_size=54M" >> /usr/local/etc/php/conf.d/apcu.ini
 
 # Ensure imagick supports AVIF and WebP
 RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/imagick.ini \
