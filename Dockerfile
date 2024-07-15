@@ -7,7 +7,7 @@ LABEL maintainer="rickicode@gmail.com"
 RUN apt-get update && apt-get install -y \
     autoconf g++ make memcached libmemcached-dev zlib1g-dev libssl-dev libicu-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng-dev libzip-dev zip iputils-ping \
-    unzip nano dnsutils openssl git htop default-mysql-client libpq-dev libbz2-dev \
+    unzip nano dnsutils openssl git htop sudo default-mysql-client libpq-dev libbz2-dev \
     libmcrypt-dev libxslt-dev libsnmp-dev libmagickwand-dev libavif-dev libwebp-dev \
     && pecl install memcached redis apcu imagick \
     && docker-php-ext-enable memcached redis apcu imagick \
